@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Social Box - Hacking Tool</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="(link unavailable)"></script>
+    <!-- Bootstrap CSS -->
+    <link href="(link unavailable)" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #1814ff;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .tool-header {
+            background-color: #111;
+            padding: 10px;
+            font-size: 24px;
+            border-bottom: 2px solid #444;
+            text-transform: uppercase;
+            color: #ff4141;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.7), 0 0 12px rgba(255, 0, 0, 0.5);
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 0 0 8px rgba(255, 0, 0, 0.7), 0 0 12px rgba(255, 0, 0, 0.5);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        
+        .virus-list {
+            max-height: 300px;
+            overflow-y: auto;
+            background: #222;
+            border: 2px solid #444;
+            padding: 10px;
+            box-shadow: 0 0 15px #1814ff, 0 0 15px #ff0000;
+        }
+        
+        .virus-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .virus-item:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            border: 2px solid #1814ff;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+        }
+        
+        .popup a {
+            display: block;
+            color: #1814ff;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .popup a:hover {
+            color: #ff0000;
+        }
+        
+        .overlay, .overlay-passkey {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+        }
+        
+        .form-input {
+            background-color: #111;
+            color: #1814ff;
+            border: 1px solid #333;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        
+        .glitch {
+            font-size: 100px;
+            font-weight: bold;
+            color: #1814ff;
+            text-shadow: 2px 2px 0 rgba(255, 0, 0, 0.75);
+            text-align: center;
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+        
+
+
+        @keyframes glitch {
+            0%, 100% {
+                clip: rect(44px, 9999px, 56px, 0);
+            }
+            10% {
+                clip: rect(94px, 9999px, 36px, 0);
+                transform: skew(0.1deg);
+            }
+            20% {
+                clip: rect(32px, 9999px, 79px, 0);
+                transform: skew(0.3deg);
+            }
+            30%, 70% {
+                clip: rect(17px, 9999px, 93px, 0);
+            }
+        }
+        
+        .passkey-popup {
+            border: 2px solid #ff4141;
+            box-shadow: 0 0 15px #ff4141;
+            animation: flicker 3s infinite alternate;
+        }
+        
+        .loading {
+            color: #1814ff;
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+            animation: blink 1s infinite alternate;
+        }
+        
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tool-header text-center">
+        <marquee behavior="scroll" direction="left">WELCOME TO IPPV.IT IS A VIRUS TOOLKIT USE IT ON YOUR OWN RESPONSIBILITY. BUY A PASSKEY TO USE IPPV TOOLS. </marquee>
+
+        <h1 class="glitch">IPPV</h1>
+    </div>
+    <div class="container mx-auto mt-4">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h2 class="text-center">Virus List</h2>
+                <div class="virus-list bg-dark text-light p-4 rounded-lg">
+                    <div class="virus-item" data-virus="Trojan">Trojan</div>
+                    <div class="virus-item" data-virus="Worm">Worm</div>
+                    <div class="virus-item" data-virus="Ransomware">Ransomware</div>
+                    <div class="virus-item" data-virus="Spyware">Spyware</div>
+                    <div class="virus-item" data-virus="Adware">Adware</div>
+                    <div class="virus-item" data-virus="Rootkit">Rootkit</div>
+                    <div class="virus-item" data-virus="Keylogger">Keylogger</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div class="overlay"></div>
+    <div class="popup bg-dark text-light p-4 rounded-lg">
+        <h3 class="popup-title"></h3>
+        <a class="popup-link" data-type="image">Image</a>
+        <a class="popup-link" data-type="payload">Payload</a>
+        <a class="popup-link" data-type="pdf">PDF</a>
+        <button class="btn btn-danger mt-2 close-popup" style="background-color: #ff0000;">Close</button>
+    </div>
+
+    <!-- PassKey and Pathway Prompt -->
+    <div class="overlay-passkey"></div>
+    <div class="passkey-popup bg-dark text-light p-4 rounded-lg" style="display:none;">
+        <h3 class="text-center mb-3">Enter PassKey and Pathway</h3>
+        <label for="passkey" class="block">PassKey:</label>
+        <input type="password" id="passkey" class="form-input mb-3 w-full">
+        <label for="pathway" class="block">Storage Pathway:</label>
+        <input type="text" id="pathway" class="form-input mb-3 w-full">
+        <button class="btn btn-success mt-2 submit-passkey" style="background-color: #ff0000;">Submit</button>
+        <button class="btn btn-danger mt-2 close-passkey-popup" style="background-color: #ff0000;">Close</button>
+        <p id="passkey-error" class="text-danger mt-2" style="display:none;"></p>
+        <div id="loading-message" class="loading" style="display:none;">Loading...</div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="(link unavailable)"></script>
+
+    <!-- JavaScript -->
+    <script>
+        const virusItems = document.querySelectorAll('.virus-item');
+        const popup = document.querySelector('.popup');
+        const overlay = document.querySelector('.overlay');
+        const popupTitle = document.querySelector('.popup-title');
+        const closePopupBtn = document.querySelector('.close-popup');
+        const passkeyPopup = document.querySelector('.passkey-popup');
+        const submitPasskeyBtn = document.querySelector('.submit-passkey');
+
+        const closePasskeyPopupBtn = document.querySelector('.close-passkey-popup');
+        const passkeyError = document.getElementById('passkey-error');
+        const loadingMessage = document.getElementById('loading-message');
+        let selectedOption = '';
+
+        // Track which option was clicked (Image, Payload, PDF)
+        virusItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const virusName = this.getAttribute('data-virus');
+                popupTitle.innerText = `${virusName} Options`;
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+            });
+        });
+
+        // Close popup
+        closePopupBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        // Handle click events for Image, Payload, and PDF
+        document.querySelectorAll('.popup-link').forEach(link => {
+            link.addEventListener('click', function() {
+                selectedOption = this.getAttribute('data-type');
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+                passkeyPopup.style.display = 'block';
+            });
+        });
+
+        // Close PassKey popup
+        closePasskeyPopupBtn.addEventListener('click', () => {
+            passkeyPopup.style.display = 'none';
+        });
+
+        // Handle PassKey submission
+        submitPasskeyBtn.addEventListener('click', () => {
+            const passkey = document.getElementById('passkey').value;
+            const pathway = document.getElementById('pathway').value;
+            passkeyError.style.display = 'none';
+            loadingMessage.style.display = 'none';
+
+            // Validate PassKey and Pathway
+            if (passkey === 'XAA0OBXPOYTGHJFR#' && pathway.trim() !== '') {
+                loadingMessage.style.display = 'block';
+                setTimeout(() => {
+                    alert(`Successfully loaded ${selectedOption.toUpperCase()}...`);
+                    passkeyPopup.style.display = 'none';
+                    loadingMessage.style.display = 'none';
+                }, 2000);
+            } else if (passkey !== 'XAA0OBXPOYTGHJFR#') {
+                passkeyError.textContent = 'Incorrect PassKey. Please buy a valid passkey.';
+                passkeyError.style.display = 'block';
+                passkeyError.style.color = 'red';
+            } else if (pathway.trim() === '') {
+                passkeyError.textContent = 'Please provide a valid pathway for storing data.';
+                passkeyError.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
